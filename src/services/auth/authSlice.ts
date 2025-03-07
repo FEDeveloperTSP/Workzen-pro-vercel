@@ -40,12 +40,16 @@ export const RegisterUser = createAsyncThunk(
   "auth/RegisterUser",
   async (data: Register, { rejectWithValue }) => {
     try {
-      const response = await axios.post(apiRoutes.auth.register, data, {
-        withCredentials: true, // ✅ Correct way to include cookies
+      console.log("jhdjkwldkw");
+      const response = await axios.post(apiRoutes.auth.register, data);
+      Cookies.set("cache_key", response.data.cache_key, {
+        expires: 1 / 96, // 15 minutes = 1/96 of a day
+        path: "/",
       });
-      console.log("Success", response.data.data.token);
+      console.log("Success", response.data.cache_key);
       return response.data;
     } catch (error: any) {
+      console.log(error);
       return rejectWithValue(
         error.response?.data?.message || "Registration failed"
       );
@@ -59,12 +63,12 @@ export const confirmOTP = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
-        apiRoutes.auth.email,
-        { otp, email },
-        { withCredentials: true } // ✅ Correct way to include cookies
-      );
-      console.log("Success", response.data.data.token);
+      const Cache_key = Cookies.get("cache_key");
+      const response = await axios.post(apiRoutes.auth.email, {
+        otp,
+        email,
+        cache_key: Cache_key,
+      });
       return response.data;
     } catch (error: any) {
       return rejectWithValue(
@@ -78,8 +82,11 @@ export const confirmPayment = createAsyncThunk(
   "auth/confirmPayment",
   async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(apiRoutes.auth.email, {
+      const Cache_key = Cookies.get("cache_key");
+
+      const response = await axios.post(apiRoutes.auth.payment, {
         payment_method_id: id,
+        cache_key: Cache_key,
       });
 
       console.log("Success", response.data);

@@ -77,7 +77,7 @@ export const useRegisterMutation = () => {
       },
       onError: (error: any) => {
         console.error("Registration failed:", error);
-        toast.error(error);
+        // toast.error(error);
       },
     }
   );
@@ -95,7 +95,7 @@ export const useOTPMutation = () => {
       },
       onError: (error: any) => {
         console.error("Registration failed:", error);
-        toast.error(error);
+        // toast.error(error);
       },
     }
   );

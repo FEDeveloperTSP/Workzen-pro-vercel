@@ -37,11 +37,11 @@ const Membership: React.FC<OTPFormProps> = ({ nextStep }) => {
             // Wait for the API call to finish before showing messages
             await mutateAsync({ id });
 
-            toast.success("Login successful!");
+            toast.success("Payment successful! Proceed to login");
             console.log("Data saved!", id);
             router.push("/login");
         } catch (error: any) {
-            toast.error(error || "Login failed");
+            toast.error(error || "Payment failed");
         }
     };
     const { mutateAsync, isLoading } = usePaymentMutation();

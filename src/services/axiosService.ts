@@ -13,9 +13,9 @@ const axios = axios_.create({
   // withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*", // Allow all origins (change if needed)
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    // "Access-Control-Allow-Origin": "*", // Allow all origins (change if needed)
+    // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    // "Access-Control-Allow-Headers": "Content-Type, Authorization",
   },
 });
 
