@@ -8,7 +8,6 @@ import { getInitialsLogo, getInitialsOrLogo } from "@/services/useFilter"
 
 interface ScheduleComponentProps {
   selectedDate: string
-  setSelectedDate: (date: string) => void
   data: Shift[]
 }
 
@@ -23,7 +22,7 @@ type GroupedManagers = Record<
   }[]
 >
 
-const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ selectedDate, setSelectedDate, data }) => {
+const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ selectedDate, data }) => {
   const { managerdata } = useSelector((state: RootState) => state.manager)
   const new_managers = managerdata?.managers_data || []
 
@@ -62,7 +61,7 @@ const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ selectedDate, set
       return startTime && endTime ? (
         <div className="border border-[#337E8980] rounded-sm bg-[#ebf3f4] flex items-center justify-between p-2">
           {`${startTime} - ${endTime}`}
-          {day < today && <div className={`h-3 w-3 ${statusClass} rounded-full`}></div>}
+          {day < today && <div className={`h-3 w-3 min-h-3 min-w-3 ${statusClass} rounded-full`}></div>}
         </div>
       ) : (
         "-"

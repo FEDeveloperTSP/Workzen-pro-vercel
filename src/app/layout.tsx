@@ -3,10 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/services/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
-import { AntdRegistry } from '@ant-design/nextjs-registry';
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+// import { AntdRegistry } from '@ant-design/nextjs-registry';
+// import "slick-carousel/slick/slick.css"
+// import "slick-carousel/slick/slick-theme.css"
 import DynamicTitle from "./components/DynamicTitle";
+// import '@ant-design/v5-patch-for-react-19';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,10 +35,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-hide`}
       >
         <ReactQueryProvider>
-          <AntdRegistry>
+          {/* <AntdRegistry> */}
             <DynamicTitle/>
             {children}
-          </AntdRegistry>
+          {/* </AntdRegistry> */}
         </ReactQueryProvider>
         <Toaster />
       </body>

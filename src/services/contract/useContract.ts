@@ -4,6 +4,8 @@ import { useMutation } from "react-query";
 import { generatePayroll, generateReport, getAllContracts, uploadCon } from "./contractSlice"
 import toast from "react-hot-toast";
 import { Report } from "./type";
+import axios from "../axiosService";
+import { apiRoutes } from "../apiRoutes";
 
 export const useGetAllContractsMutation = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -45,22 +47,14 @@ export const useUploadContractsMutation = () => {
     );
 };
 export const useGenerateReportMutation = () => {
-    const dispatch = useDispatch<AppDispatch>();
-
-    return useMutation(
-        async (data: Report) => {
-            // Wait for the API response before proceeding
-            return await dispatch(generateReport(data)).unwrap();
+    return useMutation({
+        mutationFn: async (data: Report) => {
+            const response = await axios.post(apiRoutes.report.generate, data, {
+                responseType: 'blob',
+            });
+            return response.data; // this is a Blob
         },
-        {
-            onSuccess: () => {
-                // toast.success("Contract Uploaded successfully!");
-            },
-            onError: (error: any) => {
-                toast.error(error || "Error generating report");
-            },
-        }
-    );
+    });
 };
 export const useGeneratePayrollMutation = () => {
     const dispatch = useDispatch<AppDispatch>();

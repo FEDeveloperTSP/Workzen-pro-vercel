@@ -148,12 +148,6 @@ const DateSelector = () => {
 
       <ScheduleComponent
         selectedDate={`${selectedYear}-${String(selectedMonth + 1).padStart(2, "0")}-${String(selectedDay).padStart(2, "0")}`}
-        setSelectedDate={(newDate: string) => {
-          const date = new Date(newDate)
-          setSelectedDay(date.getDate())
-          setSelectedMonth(date.getMonth())
-          setSelectedYear(date.getFullYear())
-        }}
         data={shifts?.data || []}
       />
     </div>

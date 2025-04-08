@@ -8,7 +8,7 @@ export interface WorkerData {
     workers_data: workerTable[]
 }
 export interface workerTable {
-    id: string,
+    id: number,
     name: string,
     availibility: string,
     email: string,
@@ -18,6 +18,8 @@ export interface workerTable {
     branches: BranchData,
     phone_number: string,
     logo: string,
+
+    branch: string
 }
 export interface SingleWorker {
     id?: number;
