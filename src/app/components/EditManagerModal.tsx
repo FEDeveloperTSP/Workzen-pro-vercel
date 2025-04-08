@@ -192,8 +192,8 @@ const EditManager = ({ isOpen, onClose, manager }: EditManagerModalProps) => {
                             className="h-12 w-12 rounded-full"
                         />
                         {/* {logoUrl !== null ? <Image src={logoUrl} alt="Manager Logo" className="h-12 w-12 rounded-full" width={100} height={100} /> : <Image src={placeholder} alt="placeholder" className="h-12 w-12 rounded-full" width={100} height={100} />} */}
-                        <label htmlFor="logoUpload" className="ml-4 cursor-pointer">
-                            upload
+                        <label htmlFor="logoUpload" className=" cursor-pointer bg-[#4FD1C5] px-4 py-1 rounded-lg text-white">
+                            Upload
                         </label>
                         <input
                             type="file"

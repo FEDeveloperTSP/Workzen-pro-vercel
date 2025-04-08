@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const role = req.cookies.get("role")?.value; // Get the role from cookies
   const { pathname } = req.nextUrl;
 
-  const isAuthRoute = pathname === "/login";
+  const isAuthRoute = pathname === "/home";
   const isRegisterRoute = pathname === "/register";
   const isHomeRoute = pathname === "/"; // Handle root `/`
   const isProtectedRoute = !isAuthRoute && !isRegisterRoute; // All other routes
@@ -13,7 +13,7 @@ export function middleware(req: NextRequest) {
   // Redirect unauthenticated users trying to access protected routes
   if (!token) {
     if (isProtectedRoute || isHomeRoute) {
-      return NextResponse.redirect(new URL("/login", req.url));
+      return NextResponse.redirect(new URL("/home", req.url));
     }
   } else {
     // Redirect authenticated users to their respective dashboards

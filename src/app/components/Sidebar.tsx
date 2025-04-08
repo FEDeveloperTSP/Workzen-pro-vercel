@@ -117,7 +117,7 @@ const Sidebar = () => {
             console.error("Error fetching user data:", error);
         },
     })
-    const logo = `https://be.myweightlosscentre.co.uk/${data?.data.logo}`
+    const logo = `https://be.myweightlosscentre.co.uk/${data?.data.company_logo}`
 
     return (
         <>
@@ -150,7 +150,7 @@ const Sidebar = () => {
                         className=""
                     />
                     <div className="flex gap-2 font-bold text-xl font-poppins pt-6 items-center">
-                        {data?.data.logo ? (
+                        {data?.data.company_logo ? (
                             <Image
                                 src={logo}
                                 alt="Company Logo"

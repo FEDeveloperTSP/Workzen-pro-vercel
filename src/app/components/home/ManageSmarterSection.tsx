@@ -2,8 +2,9 @@ import Image from "next/image"
 import ManageSmarterImage from "@/assets/LandingPage/Work-Together-Image.png"
 import ManageSmarterTextStroke from "@/assets/LandingPage/manage-smarter-text-stroke.png"
 import CustomButton from "@/components/ui/CustomButton"
-
+import { useRouter } from "next/navigation"
 const ManageSmarterSection = () => {
+  const router=useRouter()
   return (
     <div className="wrapper my-16 sm:p-4 xl:p-0">
       <div className="flex px-4 py-8 items-center">
@@ -22,7 +23,7 @@ const ManageSmarterSection = () => {
             <div>Easily track attendance, manage shifts, and simplify payroll — all in one place.</div>
           </div>
 
-          <CustomButton showArrow variant="secondary">
+          <CustomButton showArrow variant="secondary" onClick={() => router.push("/register") }>
             Try it now
           </CustomButton>
 

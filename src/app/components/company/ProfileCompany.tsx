@@ -18,6 +18,8 @@ import { RootState } from '@/services/store'
 import { MdEdit } from 'react-icons/md'
 import { logout } from '@/services/auth/authSlice'
 import { getInitialsOrLogo } from '@/services/useFilter'
+import { FiUpload } from 'react-icons/fi'
+import TextArea from 'antd/es/input/TextArea'
 
 const ProfileCompany = () => {
     const [showForm, setShowForm] = useState(false);
@@ -126,7 +128,9 @@ const ProfileCompany = () => {
         setIsEditing(!isEditing);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         setEditedProfile({
             ...editedProfile,
             [e.target.name]: e.target.value,
@@ -155,7 +159,7 @@ const ProfileCompany = () => {
 
         try {
             await mutate(formData);
-            onSubmit();
+            mutateAsync();
             setIsEditing(false);
             toast.success("Profile updated successfully!");
         } catch (error) {
@@ -177,7 +181,7 @@ const ProfileCompany = () => {
     return (
         <>
 
-            
+
             <Image
                 src={Vector}
                 alt="Profile"
@@ -189,7 +193,7 @@ const ProfileCompany = () => {
                 className="absolute top-12 right-1 transform rounded-b-3xl h-40 mt-5"
             />
             {/* </div> */}
-            <div className="h-40 w-full mt-20 flex items-center gap-4 rounded-xl pb-4 bg-white px-8 py-6 shadow-xl relative bg-opacity-15 backdrop-blur-lg">
+            <div className="h-40 w-full md:w-1/2 mt-20 flex items-center gap-4 rounded-xl pb-4 bg-white shadow-sm px-8 py-6 relative bg-opacity-60 ">
                 <div className="relative">
                     {finalLogoFile ? (
                         <Image
@@ -227,8 +231,8 @@ const ProfileCompany = () => {
                                 className="hidden"
                                 id="logo-upload"
                             />
-                            <label htmlFor="logo-upload" className="ml-4 cursor-pointer">
-                                upload
+                            <label htmlFor="logo-upload" className="cursor-pointer bg-[#4FD1C5] px-4 py-1 rounded-lg text-white">
+                                Upload
                             </label>
                         </div>
                     )}
@@ -305,19 +309,26 @@ const ProfileCompany = () => {
 
                         <div className="space-y-2">
                             <Label className="text-black font-semibold">Address</Label>
-                            <Input
+                            <TextArea
                                 name="address"
                                 disabled={!isEditing}
                                 value={editedProfile.address || ""}
                                 onChange={handleChange}
                                 className="bg-gray-100 border-none text-black"
+                                onInput={(e) => {
+                                    const target = e.target as HTMLTextAreaElement;
+                                    target.style.height = "auto"; // Reset height
+                                    target.style.height = `${target.scrollHeight}px`; // Set new height
+                                }}
+                                style={{ minHeight: "10px", overflow: "hidden" }} // Ensure proper resizing
+                                // rows={1}
                             />
                         </div>
                         <div className="space-y-2">
                             <Label className="text-black font-semibold">Postal Code</Label>
                             <Input
                                 name="postal_code"
-                                disabled
+                                disabled={!isEditing}
                                 value={editedProfile.postal_code || ""}
                                 onChange={handleChange}
                                 className="bg-gray-100 border-none text-black"
@@ -327,7 +338,7 @@ const ProfileCompany = () => {
 
                     {isEditing && (
                         <div className="mt-6 flex justify-end">
-                            <Button className="bg-green-500 text-white" onClick={handleSave}>
+                            <Button className="bg-[#4FD1C5] text-white" onClick={handleSave}>
                                 Save Changes
                             </Button>
                         </div>

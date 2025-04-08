@@ -16,4 +16,5 @@ export interface User {
   wage: number | null;
   created_at: string;
   updated_at: string;
+  company_logo:string;
 }

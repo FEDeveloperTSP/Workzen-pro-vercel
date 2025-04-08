@@ -29,10 +29,7 @@ export const apiRoutes = {
     update: (id: number) => `/update-manager/${id}`,
     single: (id: number) => `/single-manager/${id}`,
     assignshifts: '/assign-shifts',
-    getShifts: (date: string) => {
-      console.log('shift current date: ', date);
-      return `/get-shifts?date=${date}`
-    },
+    getShifts: (date: string) => `/get-shifts?date=${date}`,
     getChangeShiftTime: '/change-shift-time',
     postChangeShiftTime: '/change-shift-time',
   },

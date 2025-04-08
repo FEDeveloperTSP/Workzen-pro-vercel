@@ -3,8 +3,9 @@ import Image from "next/image"
 import StreamLineYourWorkforce from "@/assets/LandingPage/stream-line-your-workforce-image.png"
 import BackgroundVector from "@/assets/LandingPage/background-vector.png"
 import TextStroke from "@/assets/LandingPage/text-stroke.png"
-
+import { useRouter } from "next/navigation"
 const StreamLineWorkforceSection = () => {
+  const router=useRouter()
   return (
     <div className="wrapper my-16 sm:p-4 xl:p-0">
       <div className="flex px-4 py-8 items-center">
@@ -28,7 +29,7 @@ const StreamLineWorkforceSection = () => {
               </div>
             </div>
           </div>
-          <CustomButton showArrow variant="primary">
+          <CustomButton showArrow variant="primary" onClick={() => router.push("/register") }>
             Get Started
           </CustomButton>
 

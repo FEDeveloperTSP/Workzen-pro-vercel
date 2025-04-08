@@ -11,7 +11,7 @@ interface CardProps {
 
 const Card = ({ title, count, Icon, imageSrc }: CardProps) => {
     return (
-        <div className="w-full h-20 bg-white rounded-2xl shadow-md px-6 py-4 flex flex-row justify-left gap-4 shadow-orange ">
+        <div className="w-full h-20 bg-white rounded-2xl shadow-sm px-6 py-4 flex flex-row justify-left gap-4 shadow-orange ">
             <div className="bg-[#4FD1C5] rounded-xl p-2  flex justify-center items-center h-10 w-10">
                 {Icon ? (
                     <Icon size={24} color="white" />

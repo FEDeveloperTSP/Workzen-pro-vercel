@@ -2,8 +2,9 @@ import { CircleCheckBig } from "lucide-react"
 import Image from "next/image"
 import CustomButton from "@/components/ui/CustomButton"
 import ChooseYourPlanTextStroke from "@/assets/LandingPage/choose-your-plan-text-stroke.png"
-
+import { useRouter } from "next/navigation"
 const ChooseYourPlanSection = () => {
+  const router=useRouter()
   return (
     <div className="wrapper my-16 sm:p-4 xl:p-0">
       <div className="flex items-center justify-center">
@@ -19,8 +20,8 @@ const ChooseYourPlanSection = () => {
       <div className="flex gap-4 my-16">
         <div className="flex-1">
           <div className="border border-[#FFE492] p-8 space-y-6">
-            <div className="font-semibold text-2xl">Free</div>
-            <div className="font-semibold text-4xl">$0</div>
+            <div className="font-semibold text-2xl">Standard</div>
+            <div className="font-semibold text-4xl">$5</div>
             <div className="font-semibold">Capture ideas and find them quickly</div>
 
             <ul className="space-y-4">
@@ -43,7 +44,7 @@ const ChooseYourPlanSection = () => {
                 <CircleCheckBig /> Add due dates, reminders, and notifications to your tasks
               </li>
             </ul>
-            <CustomButton variant="outline">Get Started</CustomButton>
+            <CustomButton variant="outline" onClick={() => router.push("/register") }>Get Started</CustomButton>
 
             {/* <button className="px-8 py-4 rounded-lg border border-[#FFE492] font-medium">Get Started</button> */}
           </div>
@@ -74,7 +75,7 @@ const ChooseYourPlanSection = () => {
                 <CircleCheckBig stroke="#000" /> Add due dates, reminders, and notifications to your tasks
               </li>
             </ul>
-            <CustomButton variant="secondary">Get Started</CustomButton>
+            <CustomButton variant="secondary" onClick={() => router.push("/register") }>Get Started</CustomButton>
             {/* <button className="bg-[#4F9CF9] px-8 py-4 rounded-lg text-white">Get Started</button> */}
           </div>
         </div>
@@ -105,7 +106,7 @@ const ChooseYourPlanSection = () => {
               </li>
             </ul>
 
-            <CustomButton variant="outline">Get Started</CustomButton>
+            <CustomButton variant="outline" onClick={() => router.push("/register") }>Get Started</CustomButton>
             {/* <button className="px-8 py-4 rounded-lg border border-[#FFE492] font-medium">Get Started</button> */}
           </div>
         </div>

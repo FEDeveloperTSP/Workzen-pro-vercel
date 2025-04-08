@@ -4,8 +4,9 @@ import HeroImage from "@/assets/LandingPage/hero-image.png"
 import Image from "next/image"
 import { IoMdCheckmark } from "react-icons/io"
 import WorkzenLogo from "@/assets/LandingPage/workzen-logo.png"
-
+import { useRouter } from "next/navigation"
 const HeroSection = () => {
+  const router=useRouter()
   return (
     <div className="bg-[#4FD1C5]">
       <div className="wrapper sm:p-0 lg:p-4">
@@ -21,8 +22,8 @@ const HeroSection = () => {
 
               {/* <button className="bg-[#424242] px-8 py-4 rounded-lg">Login</button> */}
             </Link>
-            <CustomButton variant="white" showArrow>
-              Try for free
+            <CustomButton variant="white" showArrow onClick={() =>router.push("/register") }>
+              Try Workzen-pro
             </CustomButton>
             {/* <button className="bg-white px-8 py-4 rounded-lg text-[#4FD1C5] flex items-center justify-center gap-2">
                     Try for free <MdOutlineArrowForward />
@@ -64,8 +65,8 @@ const HeroSection = () => {
             <div className="text-[18px]">Discover how Workzen-Pro can transform your workforce management with innovative, time- saving features.</div>
 
             <div className="mt-6">
-              <CustomButton variant="white" showArrow>
-                Try Workzen-pro for free
+              <CustomButton variant="white" showArrow onClick={() =>router.push("/register") }>
+                Try Workzen-pro
               </CustomButton>
               {/* <button className="bg-white px-8 py-4 rounded-lg text-[#4FD1C5] flex items-center justify-center gap-2">
                       Try Workzen-pro for free <MdOutlineArrowForward />

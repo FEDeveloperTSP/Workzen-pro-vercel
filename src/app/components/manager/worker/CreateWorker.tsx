@@ -21,6 +21,7 @@ import { useGetBranchesMutation } from '@/services/branch/useBranch';
 import { RootState } from '@/services/store';
 import { useCreateManagerMutation, useGetAllManagersMutation } from '@/services/manager/useManager';
 import { useCreateWorkerMutation, useGetAllWorkersMutation } from '@/services/worker/useWorker';
+import DynamicPhoneInput from '../../PhoneInput';
 const { Option } = Select
 const CreateWorker = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -154,6 +155,9 @@ const CreateWorker = () => {
         }
     };
 
+    const handlePhoneChange = (value: string) => {
+        setFormData(prev => ({ ...prev, phone_number: value }));
+    };
     return (
         <>
             <Button className='bg-[#4FD1C5] w-fit' onClick={() => setIsModalOpen(true)}>
@@ -215,8 +219,14 @@ const CreateWorker = () => {
                     </div>
                     <div className='flex gap-8 mt-8 w-full'>
                         <div className='flex-1'>
-                            <Label className='text-black font-semibold'>Phone no</Label>
-                            <Input type="text" name="phone_number" onChange={handleInputChange} className='h-8' />
+                            <Label htmlFor='phone_number' className='text-black font-semibold'>Phone no</Label>
+                            <DynamicPhoneInput
+                                id="phone_number"
+                                name="phone_number"
+                                onChange={handlePhoneChange}
+                                className="w-full mt-1 md:mt-2"
+                            // required={required}
+                            />
                         </div>
                         <div className='flex-1'>
                             <Label className='text-black font-semibold'>Assign Wage/hr</Label>

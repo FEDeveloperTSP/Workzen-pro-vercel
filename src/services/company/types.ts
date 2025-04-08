@@ -15,4 +15,5 @@ export interface Shift {
     attendance_report: {
         status: 'present' | 'absent' | 'late' | null;
     } | null;
+    presence_status: 'present' | 'absent' | 'late'
 }

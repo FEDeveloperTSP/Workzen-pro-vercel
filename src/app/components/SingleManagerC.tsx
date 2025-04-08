@@ -121,7 +121,7 @@ const SingleManagerC = () => {
                 alt="Profile"
                 className="absolute top-12 right-1 transform rounded-b-3xl h-40 mt-5"
             />
-            <div className="h-40 w-full mt-20 flex items-center gap-4 rounded-xl pb-4 bg-white px-8 py-6 shadow-xl relative bg-opacity-15 backdrop-blur-lg">
+            <div className="h-40 w-full md:w-1/2 mt-20 flex items-center gap-4 rounded-xl pb-4 bg-white px-8 py-6 shadow-sm relative bg-opacity-60">
                 {typeof singlemanager.logo === "string" && singlemanager.logo.trim() !== "" ? (
                     <Image
                         src={logo}
@@ -144,7 +144,7 @@ const SingleManagerC = () => {
 
             {/* Profile Information */}
             <div className="grid grid-cols-3 gap-20 mt-4 ">
-                <div className="bg-white shadow-lg p-4 rounded-xl px-4 py-4  min-w-fit">
+                <div className="bg-white shadow-sm p-4 rounded-xl px-4 py-4  min-w-fit">
                     <h3 className="font-semibold mb-2 py-4">Profile Information</h3>
                     <hr />
                     <div className='flex flex-col px-2 gap-3 mt-4'>
@@ -178,12 +178,11 @@ const SingleManagerC = () => {
                 </div>
 
                 {/* Annual Leave Chart Placeholder */}
-                <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-lg w-60 gap-6">
+                {/* <div className="flex flex-col items-center bg-white p-4 rounded-2xl shadow-lg w-60 gap-6">
                     <h3 className="text-gray-800 font-medium text-md">Annual Leave</h3>
                     <hr />
                     <div className="relative w-40 h-40">
 
-                        {/* <Doughnut data={dataa} /> */}
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
                             <p className="text-gray-500 text-sm">Completed</p>
                             <p className="text-black text-xl font-semibold">
@@ -191,7 +190,7 @@ const SingleManagerC = () => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Attendance Chart Placeholder */}
                 {/* <div className="border p-4 rounded-lg flex items-center justify-center">

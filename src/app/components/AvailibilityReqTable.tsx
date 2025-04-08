@@ -91,7 +91,7 @@ const AvailibilityReqTable = ({ data }: { data: ManagerData }) => {
         <div className='flex gap-4'>
           <button
             onClick={() => handleSendRequest(record.key)}
-            className={`px-4 py-2 rounded-full font-semibold 
+            className={`px-4 py-2 rounded-full font-semibold text-xs md:text-base 
                 ${record.availability === "not_sent"
                 ? "bg-[#48BB78] text-white hover:bg-green-600"
                 : "bg-gray-400 text-gray-700 cursor-not-allowed"}

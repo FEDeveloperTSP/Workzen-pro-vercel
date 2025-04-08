@@ -117,7 +117,7 @@ const TableComponent = ({ data }: { data: ManagerData }) => {
         <>
             <div className='h-screen bg-white rounded-lg mt-4'>
                 <div className='flex justify-between gap-4 md:gap-0 p-4 flex-col md:flex-row'>
-                    <div className='w-1/6 '>
+                    <div className='w-1/2 md:w-1/6 '>
                         <Search filterText={filterText}
                             onFilter={handleFilterChange} placeholder='Search in table..... ' />
                     </div>
@@ -125,7 +125,7 @@ const TableComponent = ({ data }: { data: ManagerData }) => {
                         <CreateManager />
                     </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full overflow-x-auto">
                     <Table columns={columns} dataSource={filteredData} pagination={false}  // Ensure horizontal scrolling
                     />
                 </div>

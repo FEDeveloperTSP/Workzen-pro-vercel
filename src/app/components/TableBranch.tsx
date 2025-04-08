@@ -151,7 +151,7 @@ const TableBranch = ({ branchData }: { branchData: BranchTableData }) => {
         <>
             <div className='h-screen bg-white rounded-lg'>
                 <div className='flex justify-between gap-4 md:gap-0 p-4 flex-col md:flex-row'>
-                    <div className='w-1/6 '>
+                    <div className='w-1/2 md:w-1/6 '>
                         <Search filterText={filterText}
                             onFilter={handleFilterChange} placeholder='Search in table..... ' />
                     </div>

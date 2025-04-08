@@ -1,8 +1,9 @@
 import CustomButton from "@/components/ui/CustomButton"
 import Image from "next/image"
 import ManageYourWorkForceTextStroke from "@/assets/LandingPage/manage-your-workforce-text-stroke.png"
-
+import { useRouter } from "next/navigation"
 const ManageWorkForceSection = () => {
+  const router=useRouter()
   return (
     <div className="bg-[#4FD1C5] my-16 p-16">
       <div className="wrapper space-y-8 text-white px-16">
@@ -17,7 +18,7 @@ const ManageWorkForceSection = () => {
           <div> A powerful web app for easy, on-the-go management!</div>
         </div>
 
-        <CustomButton showArrow variant="secondary" className="mx-auto">
+        <CustomButton showArrow variant="secondary" className="mx-auto" onClick={() => router.push("/register") }>
           Try Workzen-Pro
         </CustomButton>
 

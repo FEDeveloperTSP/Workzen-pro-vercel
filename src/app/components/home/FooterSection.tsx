@@ -3,8 +3,9 @@ import { Dropdown, Space } from "antd"
 import type { MenuProps } from "antd"
 import { FaChevronDown, FaFacebookF, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { GrLanguage } from "react-icons/gr"
-
+import { useRouter } from "next/navigation"
 const FooterSection = () => {
+  const router = useRouter()
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -59,7 +60,7 @@ const FooterSection = () => {
           <div className="flex-1 space-y-4">
             <div className="text-xl font-bold">Try It Today</div>
             <div>Get started for free. Add your whole team as your needs grow.</div>
-            <CustomButton showArrow variant="secondary">
+            <CustomButton showArrow variant="secondary" onClick={() => router.push("/register") }>
               Start today
             </CustomButton>
           </div>
