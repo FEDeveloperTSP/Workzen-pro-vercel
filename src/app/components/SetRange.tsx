@@ -1,24 +1,43 @@
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Modal } from 'antd'
 import React, { useState } from 'react'
 import { IoMdCalendar } from "react-icons/io";
-import { DatePickerDemo } from './DatePicker'
 import TimePopover from './TimePopover'
 
-const SetRange = () => {
+const SetRange = ({ onTimeSelect }: { onTimeSelect: (start: string, end: string) => void }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [startTime, setStartTime] = useState("")
+    const [endTime, setEndTime] = useState("")
+
+    const handleTimeChange = (start: string, end: string) => {
+        setStartTime(start)
+        setEndTime(end)
+        onTimeSelect(start, end) // Pass time to parent (table)
+    }
+    const handleSubmit = () => {
+        onTimeSelect(startTime, endTime) // Send time to parent component
+        setIsModalOpen(false) // Close modal after submission
+    }
+
     return (
         <>
             <Button className='bg-[#4FD1C5]' onClick={() => setIsModalOpen(true)}><IoMdCalendar />Set Range</Button>
-            <Modal okText='Submit' okButtonProps={{ className: 'bg-[#4FD1C5]' }} open={isModalOpen} className='flex flex-col p-8 overflow-visible' onClose={() => setIsModalOpen(false)} onCancel={() => setIsModalOpen(false)}>
-                <h1 className='text-2xl font-normal text-center mb-8' >Set Date and Time Range</h1>
-                <div className='p-10'>
-                    <h3 className='text-lg '>Select date</h3>
-                    <DatePickerDemo />
+            <Modal
+                okText='Submit'
+                okButtonProps={{ className: 'bg-[#4FD1C5] ' }}
+                open={isModalOpen}
+                footer={null}
+                onCancel={() => setIsModalOpen(false)}
+                onOk={() => setIsModalOpen(false)}
+                className='h-full'
+            // width={{}}
+            >
+                <h1 className='text-2xl font-normal text-center mb-8'>Set Time Range</h1>
+                <div className=' h-full'>
                     <h3 className='text-lg mt-4'>Select Time</h3>
-                    <TimePopover />
+                    <div className='min-h-full'>
+                        <TimePopover onTimeChange={handleTimeChange} />
+                    </div>
                 </div>
             </Modal>
         </>

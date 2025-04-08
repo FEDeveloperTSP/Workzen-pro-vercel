@@ -1,18 +1,70 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import axios from "@/services/axiosService";
 import { apiRoutes } from "../apiRoutes";
-import { Register } from "./AuthService";
+import { Profile, Register } from "./AuthService";
+import { User } from "@/lib/definitions";
+import axiosFile from "../axiosFileService";
 
 // Define the initial state
-const initialState = {
+const initialState: {
+  user: User | null;
+  token: string | null;
+  loading: boolean;
+  error: string | null;
+  profiledata: Profile
+} = {
   user: null,
   token: Cookies.get("access_token") || null,
   loading: false,
   error: null as string | null,
+  profiledata: {
+    name: "",
+    email: "",
+    phone_number: "",
+    address: "",
+    logo: "",
+    company_name: "",
+    role: "",
+    postal_code: "",
+  }
 };
-
-// Async thunk for login
+export const profileData = createAsyncThunk(
+  "profiledata",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(apiRoutes.auth.getUserData);
+      console.log("Success", response.data.data);
+      return response.data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Unable to get user data");
+    }
+  }
+)
+export const updatePassword = createAsyncThunk(
+  "updatePassword",
+  async (data: { old_password: string, password: string, password_confirmation: string }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(apiRoutes.auth.updatePassword, data);
+      console.log("Success", response.data);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Password Update failed");
+    }
+  }
+)
+export const updateProfile = createAsyncThunk(
+  "updateProfile",
+  async (data: FormData, { rejectWithValue }) => {
+    try {
+      const response = await axiosFile.post(apiRoutes.auth.update, data);
+      console.log("Success", response.data);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Profile Update failed");
+    }
+  }
+)
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (
@@ -26,6 +78,7 @@ export const loginUser = createAsyncThunk(
       });
       console.log("Success", response.data.data.token);
       Cookies.set("role", response.data.data.role);
+      localStorage.setItem("role", response.data.data.role);
       Cookies.set("access_token", response.data.data.token, {
         expires: 7,
         path: "/",
@@ -72,7 +125,7 @@ export const confirmOTP = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       return rejectWithValue(
-        error.response?.data?.message || "Registration failed"
+        error.response?.data?.message || "Otp confirmation failed"
       );
     }
   }
@@ -108,6 +161,12 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       Cookies.remove("access_token");
+      Cookies.remove("role");
+      Cookies.remove("__stripe_mid");
+      localStorage.removeItem('role');
+    },
+    setUser: (state, action) => {
+      state.user = action.payload; // Correctly extract payload
     },
   },
   extraReducers: (builder) => {
@@ -137,9 +196,24 @@ const authSlice = createSlice({
       .addCase(RegisterUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string; // Explicitly cast as string
-      });
+      })
+      .addCase(profileData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        profileData.fulfilled,
+        (state, action: PayloadAction<Profile>) => {
+          state.loading = false;
+          state.profiledata = action.payload;
+        }
+      )
+      .addCase(profileData.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setUser } = authSlice.actions;
 export default authSlice.reducer;

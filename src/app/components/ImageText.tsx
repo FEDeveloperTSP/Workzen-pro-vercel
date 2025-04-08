@@ -7,7 +7,7 @@ const ImageText = () => {
     return (
         <>
             <h1 className="text-md md:text-lg font-bold">{isLogin ? "Welcome Back" : "Welcome"}</h1>
-            <p className="text-xs md:text-base lg:text-lg w-2/3">Employee Management System</p>
+            <p className="text-xs md:text-sm lg:text-sm ">Employee Management System</p>
         </>
     )
 }

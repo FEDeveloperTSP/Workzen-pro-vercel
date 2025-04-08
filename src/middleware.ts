@@ -27,7 +27,7 @@ export function middleware(req: NextRequest) {
         case "manager":
           dashboardPath = "/manager/dashboard";
           break;
-        case "employee":
+        case "worker":
           dashboardPath = "/worker/dashboard";
           break;
       }

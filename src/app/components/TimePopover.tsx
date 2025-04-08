@@ -4,18 +4,24 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import React, { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Card } from "@/components/ui/card";
-const TimePopover = () => {
-    const [selected, setSelected] = useState("Time Range");
-    const [startTime, setStartTime] = useState("07:00");
-    const [allStartTime, setAllStartTime] = useState("12:00");
-    const [allEndTime, setAllEndTime] = useState("11:59");
-    const [endTime, setEndTime] = useState("09:00");
-    const [startPeriod, setStartPeriod] = useState("AM");
-    const [endPeriod, setEndPeriod] = useState("PM");
+const TimePopover = ({ onTimeChange }: { onTimeChange: (start: string, end: string) => void }) => {
+    const [selected, setSelected] = useState("Time Range")
+    const [startTime, setStartTime] = useState("07:00")
+    const [endTime, setEndTime] = useState("09:00")
+
+    const handleTimeSelection = () => {
+        if (selected === "All day") {
+            onTimeChange("00:00", "23:59");
+        } else {
+            onTimeChange(startTime, endTime);
+        }
+        console.log("Selected", startTime, endTime,)
+    };
+
 
     return (
-        <Popover>
-            <PopoverTrigger  className="w-full">
+        <Popover >
+            <PopoverTrigger className="w-full ">
                 <Input placeholder="Select Time" className="w-full h-9" />
             </PopoverTrigger>
             <PopoverContent className="p-3 w-auto shadow-md bg-white z-[9999]" forceMount side="bottom" align="start">
@@ -44,40 +50,29 @@ const TimePopover = () => {
 
                 {/* Show this small component below based on selection */}
                 {selected === "Time Range" && (
-                    <>
-
-                        <div className="flex items-center justify-between space-x-2">
-                            <div className="flex flex-col  p-2">
-                                <p>Start</p>
-                                <Input
-                                    type="time"
-                                    value={startTime}
-                                    onChange={(e) => setStartTime(e.target.value)}
-                                    className="w-auto text-center"
-                                />
-                                <ToggleGroup type="single" value={startPeriod} onValueChange={setStartPeriod}>
-
-                                </ToggleGroup>
-                            </div>
-
-                            <span className="text-gray-500 items-center text-lg pt-6">→</span>
-
-                            <div className="flex flex-col  p-2">
-                                <p>End</p>
-                                <Input
-                                    type="time"
-                                    value={endTime}
-                                    onChange={(e) => setEndTime(e.target.value)}
-                                    className="w-auto text-center"
-                                />
-                                <ToggleGroup type="single" value={endPeriod} onValueChange={setEndPeriod}>
-
-                                </ToggleGroup>
-                            </div>
+                    <div className="flex items-center justify-between space-x-2">
+                        <div className="flex flex-col p-2">
+                            <p>Start</p>
+                            <Input
+                                type="time"
+                                value={startTime}
+                                onChange={(e) => setStartTime(e.target.value)}
+                                className="w-auto text-center"
+                            />
                         </div>
-                    </>
-
+                        <span className="text-gray-500 items-center text-lg pt-6">→</span>
+                        <div className="flex flex-col p-2">
+                            <p>End</p>
+                            <Input
+                                type="time"
+                                value={endTime}
+                                onChange={(e) => setEndTime(e.target.value)}
+                                className="w-auto text-center"
+                            />
+                        </div>
+                    </div>
                 )}
+
 
                 {selected === "All day" && (
                     <>
@@ -116,7 +111,9 @@ const TimePopover = () => {
                         </div>
                     </>
                 )}
-
+                <Button className="mt-4 bg-[#4FD1C5]" onClick={handleTimeSelection}>
+                    Confirm Time
+                </Button>
             </PopoverContent>
         </Popover>
     );

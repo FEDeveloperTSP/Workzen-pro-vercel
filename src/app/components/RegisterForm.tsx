@@ -8,6 +8,7 @@ import DynamicPhoneInput from "./PhoneInput";
 import { Register, useRegisterMutation } from "@/services/auth/AuthService";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import { Checkbox } from "antd";
 
 interface RegisterFormProps {
     nextStep: (email?: string) => void;
@@ -16,6 +17,7 @@ interface RegisterFormProps {
 const RegisterForm = ({ nextStep }: RegisterFormProps) => {
     const { mutate, isLoading } = useRegisterMutation();
     // const [loading, setLoading] = useState(false);
+    const [agree, setAgree] = useState(false);
 
 
     const {
@@ -52,9 +54,9 @@ const RegisterForm = ({ nextStep }: RegisterFormProps) => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} className="w-5/6">
-                <h1 className="text-2xl md:text-4xl font-semibold">Create Account</h1>
+                <h1 className="text-2xl md:text-4xl font-semibold mb-4">Create Account</h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2 md:mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
                     <div>
                         <Label htmlFor="name">Name</Label>
                         <Input
@@ -88,7 +90,7 @@ const RegisterForm = ({ nextStep }: RegisterFormProps) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2 md:mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
                     <div>
                         <Label htmlFor="company_name">Company Name</Label>
                         <Input id="company_name" {...register("company_name", {
@@ -116,7 +118,7 @@ const RegisterForm = ({ nextStep }: RegisterFormProps) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mt-2 md:mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mt-2">
                     <div className="col-span-1 md:col-span-2">
                         <Label htmlFor="address">Address</Label>
                         <Input id="address" {...register("address", { required: "Address is required" })} />
@@ -130,7 +132,7 @@ const RegisterForm = ({ nextStep }: RegisterFormProps) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2 md:mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
                     <div>
                         <Label htmlFor="password">Password</Label>
                         <Input id="password" type="password" {...register("password", { required: "Password is required" })} />
@@ -150,11 +152,15 @@ const RegisterForm = ({ nextStep }: RegisterFormProps) => {
                     </div>
                 </div>
 
+                <Checkbox checked={agree} onChange={(e) => setAgree(e.target.checked)}>
+                    I agree to <span className="text-[#29CDB9]">Terms</span> and <span className="text-[#29CDB9]">Privacy Policy</span>
+                </Checkbox>
+
                 <Button
                     type="submit"
                     size="lg"
-                    disabled={isSubmitting}
-                    className="col-span-2 mt-4 md:mt-10 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]"
+                    disabled={isSubmitting || !agree}
+                    className="col-span-2 mt-4 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]"
                 >
                     {isSubmitting ? "Submitting..." : "Sign Up"}
                 </Button>

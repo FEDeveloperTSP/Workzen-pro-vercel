@@ -6,18 +6,23 @@ import { useState } from "react";
 import TableComponent from '@/app/components/TableManager';
 import AvailibiltyRequest from "./AvailibiltyRequest";
 import ShiftAttendance from "./ShiftAttendance";
+import { ManagerData } from "@/services/manager/Type";
 
-const tabs = [
-    { name: "Managers", component: < TableComponent /> },
-    { name: "Shifts & Attendance", component: <ShiftAttendance /> },
-    { name: "Availability Request", component: <AvailibiltyRequest /> },
-];
 
-const NavbarManager = () => {
+
+
+const NavbarManager = ({ data }: { data: ManagerData }) => {
     const [activeTab, setActiveTab] = useState("Managers");
+    const tabs = [
+        { name: "Managers", component: < TableComponent data={data} /> },
+        { name: "Shifts & Attendance", component: <ShiftAttendance /> },
+        { name: "Availability Request", component: <AvailibiltyRequest /> },
+    ];
+
+    console.log("managers data: ", data)
 
     return (
-        <div>
+        <div className="w-full overflow-x-auto">
             {/* Tabs Navigation */}
             <div className="flex bg-[#fbfbfb] border-b">
                 {tabs.map((tab) => (

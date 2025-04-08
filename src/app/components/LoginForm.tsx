@@ -35,8 +35,8 @@ const LoginForm = () => {
     };
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} className="pt-4 justify-end">
-                <div className="grid w-full items-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
+                <div className="w-full">
                     <Label htmlFor="email">Email</Label>
                     <Input
                         type="email"
@@ -52,7 +52,7 @@ const LoginForm = () => {
                     />
                     {errors.email && <p className="text-red-500 mt-1">{errors.email.message}</p>}
                 </div>
-                <div className="grid w-full items-center mt-8">
+                <div className="w-full mt-4">
                     <Label htmlFor="password">Password</Label>
                     <Input
                         type="password"
@@ -69,7 +69,7 @@ const LoginForm = () => {
                     disabled={isLoading}
                     type="submit"
                     size="lg"
-                    className='mt-10 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]'
+                    className='mt-4 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]'
                 >
                     {isLoading ? "Logging in..." : "Log In"}
                 </Button>

@@ -37,11 +37,11 @@ const Membership: React.FC<OTPFormProps> = ({ nextStep }) => {
             // Wait for the API call to finish before showing messages
             await mutateAsync({ id });
 
-            toast.success("Payment successful! Proceed to login");
+            toast.success("Login successful!");
             console.log("Data saved!", id);
             router.push("/login");
         } catch (error: any) {
-            toast.error(error || "Payment failed");
+            toast.error(error || "Login failed");
         }
     };
     const { mutateAsync, isLoading } = usePaymentMutation();
@@ -142,7 +142,7 @@ const Membership: React.FC<OTPFormProps> = ({ nextStep }) => {
             <div className="w-full md:w-1/2 flex justify-center">
                 <Button
                     size="lg"
-                    className="mt-28 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]"
+                    className="mt-4 h-10 w-full bg-[#4FD1C5] hover:text-[#4FD1C5] hover:bg-white hover:outline-[#4FD1C5]"
                     onClick={handlePayment}
                 >
                     Confirm Payment

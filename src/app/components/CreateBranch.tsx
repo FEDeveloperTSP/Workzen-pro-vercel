@@ -16,7 +16,8 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useCreateBranchMutation } from "@/services/branch/useBranch";
+import { useCreateBranchMutation, useGetBranchesMutation } from "@/services/branch/useBranch";
+import toast from "react-hot-toast";
 
 // ✅ Validation Schema
 const schema = yup.object().shape({
@@ -39,14 +40,15 @@ const CreateBranch = () => {
     } = useForm({
         resolver: yupResolver(schema),
     });
-
+    const { mutateAsync:getAllBranch } = useGetBranchesMutation();
+   
     // ✅ Form Submit Handler
     const onSubmit = async (data: TypeCreateBranch) => {
         console.log("Branch Data:", data);
         await mutate(data, {
-            onSuccess: () => {
+            onSuccess: async() => {
                 setIsModalOpen(false);
-
+               await getAllBranch();
             },
             onError: (error: any) => {
                 console.log(error);

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .wrapper {
+    @apply max-w-[1140px] mx-auto;
+  }
+}
+
 @layer base {
   :root {
 
@@ -146,4 +152,16 @@ body{
 .react-tel-input .selected-flag{
    border-radius: 8px !important;
 
+}
+.ant-select-outlined .ant-select-selector {
+  border:1px solid darkgray !important;
+}
+.custom-docs-table .ant-table-thead > tr > th {
+    background-color: #4FD1C5 !important;
+    color: white !important;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -1,16 +1,17 @@
 import Header from '@/app/components/Header'
 import Sidebar from '@/app/components/Sidebar'
-import Link from 'next/link'
+import ProtectedLayout from '@/hoc/protectedLayout'
 import React from 'react'
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
+    <ProtectedLayout allowedRoles={['company']}>
       <div className="h-screen flex">
         <div className="w-0 md:w-1/6 h-full overflow-y-hidden ">
           <Sidebar />
         </div>
-        <div className="flex-1 p-5 w-full">
+        <div className="flex-1 p-5 w-full overflow-x-auto">
           <Header />
           <div className='mt-10 md:mt-0'>
             {children}
@@ -25,6 +26,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           <Link href="https://techsolutionspro.co.uk/" className="text-[#4FD1C5] font-semibold"> Tech Solutions Pro</Link>
         </p>
       </footer> */}
+    </ProtectedLayout>
     </>
   )
 }

@@ -2,14 +2,27 @@ import { Input } from 'antd';
 import React from 'react';
 import { IoIosSearch } from "react-icons/io";
 
-interface SearchProps {
-    placeholder?: string;
-    className?: string;
-    // icon?: string;
+
+interface FilterComponentProps {
+    filterText: string;
+    onFilter: (filterText: string) => void;
+    placeholder: string;
 }
-const Search = ({ placeholder, className }: SearchProps) => {
+const Search = ({ filterText, onFilter,placeholder }: FilterComponentProps) => {
     return (
-        <Input className={className} prefix={<IoIosSearch />} placeholder={placeholder} />
+        <Input
+            prefix={<IoIosSearch  />}
+            className="rounded-xl"
+            // style={{
+            //   borderRadius: "20px",
+            //   height: "fit-content",
+            //   width: "auto",
+            //   // marginBottom: "20px",
+            // }}
+            placeholder={placeholder}
+            value={filterText}
+            onChange={(e) => onFilter(e.target.value)} // Update filterText state
+        />
     )
 }
 

@@ -13,10 +13,10 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
         <input
           type={type === "password" ? (isVisible ? "text" : "password") : type}
           className={cn(
-            "mt-1 md:mt-2 flex w-full border border-[#c4c4c4] rounded-lg h-8 bg-transparent px-3 py-1 text-base shadow-sm transition-colors",
+            "mt-1 md:mt-2 flex w-full border border-gray-400 rounded-lg h-8 bg-transparent px-3 py-1 text-base shadow-sm transition-colors",
             "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground",
             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-600",
-            "hover:border-gray-500 transition-all duration-200 ease-in-out",
+            "hover:border-gray-500 active:border-gray-600 transition-all duration-200 ease-in-out",
             "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
             className
           )}
@@ -28,9 +28,9 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 active:text-gray-800"
           >
-            {isVisible ? <Eye size={12} /> : <EyeOff size={18} />}
+            {isVisible ? <Eye size={18} /> : <EyeOff size={18} />}
           </button>
         )}
       </div>
